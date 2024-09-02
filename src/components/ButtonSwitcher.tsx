@@ -1,10 +1,22 @@
 "use client";
 
+//hooks
 import { useState } from "react";
+
+//components
 import { Button } from "./ui/button";
 
-const ButtonSwitcher = () => {
+const ButtonSwitcher = ({
+  onSwitch,
+}: {
+  onSwitch: (value: string) => void;
+}) => {
   const [activeButton, setActiveButton] = useState("Private");
+
+  const handleSwitch = (value: string) => {
+    setActiveButton(value);
+    onSwitch(value);
+  };
 
   return (
     <div className="inline-flex rounded-md" role="group">
@@ -12,7 +24,7 @@ const ButtonSwitcher = () => {
         type="button"
         variant={`${activeButton === "Public" ? "default" : "outline"}`}
         size="default"
-        onClick={() => setActiveButton("Public")}
+        onClick={() => handleSwitch("Public")}
       >
         Public
       </Button>
@@ -20,7 +32,7 @@ const ButtonSwitcher = () => {
         type="button"
         variant={`${activeButton === "Private" ? "default" : "outline"}`}
         size="default"
-        onClick={() => setActiveButton("Private")}
+        onClick={() => handleSwitch("Private")}
       >
         Private
       </Button>
