@@ -79,6 +79,11 @@ export const Form = () => {
     });
   };
 
+  const resetForm = () => {
+    setFormData({ name: "", password: "", country: "", duration: 1 });
+    setErrors({});
+  };
+
   return (
     <form
       className="flex flex-col gap-6 mt-5 mx-auto w-full max-w-[600px]"
@@ -159,7 +164,9 @@ export const Form = () => {
         )}
       </div>
       <div className="flex justify-center gap-4 mt-10">
-        <Button>Reset</Button>
+        <Button type="reset" onClick={resetForm}>
+          Reset
+        </Button>
         <Button type="submit">Submit</Button>
       </div>
     </form>
