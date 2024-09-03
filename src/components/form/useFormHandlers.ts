@@ -40,12 +40,12 @@ export const useFormHandlers = () => {
       body: JSON.stringify({ ...formData, isPrivate }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data.message);
+    const data = await response.json();
+
+    if (response.ok && data.success) {
+      console.log("Form submitted successfully");
       setErrors({});
     } else {
-      const data = await response.json();
       setErrors(data.errors || {});
     }
   };

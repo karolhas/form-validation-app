@@ -43,8 +43,8 @@ export async function POST(request: Request) {
   console.log("Errors:", errors);
 
   if (Object.keys(errors).length > 0) {
-    return NextResponse.json({ errors }, { status: 400 });
+    return NextResponse.json({ success: false, errors }, { status: 400 });
   }
 
-  return NextResponse.json({ message: "Validation successful" });
+  return NextResponse.json({ success: true });
 }
