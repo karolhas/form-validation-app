@@ -1,6 +1,4 @@
-import { Form } from "@/components/ui/form";
-import { Select } from "@/components/ui/select";
-import Image from "next/image";
+import { Form } from "@/components/form/Form";
 
 export default function Home() {
   return (
