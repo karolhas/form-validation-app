@@ -1,45 +1,58 @@
-# Everdome Frontend Recruitment
+# Form Validation Task
+
+![Screen_application](docs/form-application.png)
 
 ## How to run the project
 
-1.  install dependencies with `yarn install`
-2.  run `yarn dev` to start the application
+1.  Install dependencies with `yarn install`.
+2.  Run `yarn dev` to start the application.
 
-Access the application at `http://localhost:3000`
+Access the application at `http://localhost:3000`.
 
 ## Introduction
 
-Welcome to the Everdome Frontend Recruitment task! This repository is designed to assess your skills in frontend development using a simple form component. Your challenge is to implement various functionalities in a Next.js application. 
+📋 This repository contains the solution for a frontend recruitment task focused on building a form component in a Next.js application. The goal of the task was to implement various form functionalities using modern frontend development practices, with an emphasis on validation, accessibility, and user experience.
 
-Assume this is outside facing application targeted to general audience.
+## Task Requirements
 
-### Requirements
+The form needed to include the following features:
 
-- [ ] Add a public/private switch to the form, with a default value of private. See the designs for reference. Please don't use any external libraries for this switch.
-- [ ] When the switch is set to private, an additional password field should be displayed.
-- [ ] Handle form validation according to the following rules:
+- A public/private switch with "private" as the default value (implemented without external libraries).
+- When set to private, an additional password field should be displayed.
+- Validation rules for form fields:
   - All fields are required.
-  - Name should be between 3 to 50 characters long.
-  - Country select should be limited to Poland, Germany, France and Spain. In private mode, it should exclude France and Spain.
-  - Duration must be a positive integer. In private mode, it cannot exceed 20 days.
-  - The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.
-- [ ] Handle error messages for all fields.
-- [ ] Implement functionality for `Reset` button.
-- [ ] Implement server-side code that will handle form submission. It should only validate the form again and return json object with success indicator. App is based on app router, but you can switch to pages router if you prefer.
+  - Name should be between 3 and 50 characters long.
+  - Country select options should be limited to Poland, Germany, France, and Spain. In private mode, France and Spain should be excluded.
+  - Duration must be a positive integer, and in private mode, it cannot exceed 20 days.
+  - The password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character.
+- Display error messages for all fields when validation fails.
+- A `Reset` button to clear all form fields.
+- Server-side form submission that validates the data again and returns a JSON object with a success indicator.
 
-### Evaluation
+## Solution
 
-You will be evaluated based on quality of the result code, attention to detail and good practices. Feel free to make any changes to the codebase as needed to deliver a high-quality solution.
+I implemented the form using **react-hook-form** for efficient form handling and validation. Some notable features of the implementation include:
 
-### Designs
+- **Dynamic Password Field**: The password field is conditionally displayed when the form is set to private mode. I added a functionality that allows users to toggle the visibility of the password using icons (`FaEye` and `FaEyeSlash` from react-icons), improving the user experience.
+- **Country Selection**: The country selection dropdown dynamically adjusts its available options based on whether the form is in public or private mode.
+- **Validation and Error Handling**: All fields have built-in validation, and clear error messages are displayed when validation fails. React-hook-form helps manage state efficiently, reducing re-renders and ensuring smooth user interaction.
+- **Accessibility**: I ensured that the form complies with accessibility standards by adding proper ARIA attributes and implementing keyboard-navigable components.
+- **Server-Side Validation**: The form submission is handled server-side, where the data is validated again before returning a success or error message.
 
-You can find the design for switch button[here](https://www.figma.com/design/G55BF0UZqhUvuTr9KSKXC0/Untitled?m=dev).
+### Additional Features
 
-![SwitchButton](designs/switch_button.png)
+- **Improved UX**: I made slight design adjustments to improve the user experience by refining the layout and enhancing form feedback, making the form easier to interact with for the end user.
+- **Password Visibility Toggle**: Users can toggle between hiding and showing the password using an eye icon, enhancing usability.
+- **Fully Responsive**: The form is responsive and works well on all screen sizes, ensuring a good user experience on both mobile and desktop.
 
-### Delivery
+### Technologies Used
 
-- Fork this repository.
-- Create your own repository from the fork.
-- Implement all the requirements.
-- Send us the link to your repository.
+- **Next.js**: For building the application.
+- **React-Hook-Form**: For efficient form state management and validation.
+- **jest-axe**: For testing accessibility compliance.
+- **React-Icons**: For adding the password visibility toggle icons.
+- **Tailwind CSS**: For styling the components.
+
+## Conclusion
+
+This project demonstrates a strong understanding of modern frontend practices, including form validation, accessibility, and user experience. It incorporates best practices for state management and ensures that the form is accessible and user-friendly.
