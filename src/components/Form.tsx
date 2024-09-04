@@ -76,10 +76,14 @@ export const Form = () => {
       <h3 className="text-2xl font-semibold">Example Form</h3>
       <ButtonSwitcher onSwitch={setIsPrivate} />
       <div>
-        <label className="text-sm font-semibold text-gray-700 block mb-[6px]">
+        <label
+          className="text-sm font-semibold text-gray-700 block mb-[6px]"
+          htmlFor="name"
+        >
           Name
         </label>
         <Input
+          id="name"
           {...register("name", {
             required: "Name is required",
             minLength: {
@@ -93,18 +97,27 @@ export const Form = () => {
           })}
           placeholder="Name..."
           className="w-full"
+          aria-required="true"
+          aria-invalid={errors.name ? "true" : "false"}
+          aria-describedby={errors.name ? "name-error" : undefined}
         />
         {errors.name && (
-          <div className="text-red-500">{errors.name.message}</div>
+          <div id="name-error" className="text-red-500">
+            {errors.name.message}
+          </div>
         )}
       </div>
 
       {isPrivate === "Private" && (
         <div className="relative">
-          <label className="text-sm font-semibold text-gray-700 block mb-[6px]">
+          <label
+            className="text-sm font-semibold text-gray-700 block mb-[6px]"
+            htmlFor="password"
+          >
             Password
           </label>
           <Input
+            id="password"
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -121,54 +134,77 @@ export const Form = () => {
             type={showPassword ? "text" : "password"}
             placeholder="Password..."
             className="w-full pr-10"
+            aria-required="true"
+            aria-invalid={errors.password ? "true" : "false"}
+            aria-describedby={errors.password ? "password-error" : undefined}
           />
           <div
             className="absolute right-3 top-[38px] flex items-center cursor-pointer"
             onClick={togglePasswordVisibility}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            role="button"
           >
             {showPassword ? <FaEye /> : <FaEyeSlash />}
           </div>
           {errors.password && (
-            <div className="text-red-500">{errors.password.message}</div>
+            <div id="password-error" className="text-red-500">
+              {errors.password.message}
+            </div>
           )}
         </div>
       )}
 
       <div>
-        <label className="text-sm font-semibold text-gray-700 block mb-[6px]">
+        <label
+          className="text-sm font-semibold text-gray-700 block mb-[6px]"
+          htmlFor="country"
+        >
           Country
         </label>
-        <S.Select
-          value={selectedCountry}
-          onValueChange={(value) =>
-            setValue("country", value, { shouldValidate: true })
-          }
-        >
-          <S.SelectTrigger className="w-full" id="country">
-            <S.SelectValue placeholder="Select Country..." />
-          </S.SelectTrigger>
-          <S.SelectContent className="bg-white text-gray-700">
-            {allowedCountries.map((country) => (
-              <S.SelectItem
-                key={country}
-                value={country}
-                className="hover:bg-gray-100 cursor-pointer"
-              >
-                {country}
-              </S.SelectItem>
-            ))}
-          </S.SelectContent>
-        </S.Select>
+        <div id="country" role="group" aria-labelledby="country-label">
+          <S.Select
+            value={selectedCountry}
+            onValueChange={(value) =>
+              setValue("country", value, { shouldValidate: true })
+            }
+            aria-required="true"
+            aria-invalid={errors.country ? "true" : "false"}
+            aria-describedby={errors.country ? "country-error" : undefined}
+          >
+            <S.SelectTrigger className="w-full" id="country">
+              <S.SelectValue placeholder="Select Country..." />
+            </S.SelectTrigger>
+            <S.SelectContent className="bg-white text-gray-700">
+              {allowedCountries.map((country) => (
+                <S.SelectItem
+                  key={country}
+                  value={country}
+                  className="hover:bg-gray-100 cursor-pointer"
+                  role="option"
+                  aria-selected={selectedCountry === country}
+                >
+                  {country}
+                </S.SelectItem>
+              ))}
+            </S.SelectContent>
+          </S.Select>
+        </div>
         {errors.country && (
-          <div className="text-red-500">{errors.country.message}</div>
+          <div id="country-error" className="text-red-500">
+            {errors.country.message}
+          </div>
         )}
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-gray-700 block mb-[6px]">
+        <label
+          className="text-sm font-semibold text-gray-700 block mb-[6px]"
+          htmlFor="duration"
+        >
           Duration (Days)
         </label>
         <Input
+          id="duration"
           {...register("duration", {
             required: "Duration is required",
             min: { value: 1, message: "Duration must be at least 1 day" },
@@ -179,17 +215,24 @@ export const Form = () => {
           })}
           type="number"
           className="w-full"
+          aria-required="true"
+          aria-invalid={errors.duration ? "true" : "false"}
+          aria-describedby={errors.duration ? "duration-error" : undefined}
         />
         {errors.duration && (
-          <div className="text-red-500">{errors.duration.message}</div>
+          <div id="duration-error" className="text-red-500">
+            {errors.duration.message}
+          </div>
         )}
       </div>
 
       <div className="flex justify-center gap-4 mt-10">
-        <Button type="button" onClick={handleReset}>
+        <Button type="button" onClick={handleReset} aria-label="Reset the form">
           Reset
         </Button>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" aria-label="Submit the form">
+          Submit
+        </Button>
       </div>
     </form>
   );
