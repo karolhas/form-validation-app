@@ -171,7 +171,11 @@ export const Form = () => {
             aria-invalid={errors.country ? "true" : "false"}
             aria-describedby={errors.country ? "country-error" : undefined}
           >
-            <S.SelectTrigger className="w-full" id="country">
+            <S.SelectTrigger
+              className="w-full"
+              id="country-trigger"
+              aria-label="Select country"
+            >
               <S.SelectValue placeholder="Select Country..." />
             </S.SelectTrigger>
             <S.SelectContent className="bg-white text-gray-700">
@@ -204,6 +208,7 @@ export const Form = () => {
           Duration (Days)
         </label>
         <Input
+          data-testid="duration"
           id="duration"
           {...register("duration", {
             required: "Duration is required",
